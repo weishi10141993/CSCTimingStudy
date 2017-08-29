@@ -1,0 +1,1420 @@
+#include "L1Ntuple.h"
+#include "hist.C"
+#include "Style.C"
+#include "TH1.h"
+#include "math.h"
+#include "TMath.h"
+//#include "TPDF.h"//not sure it exits in root6
+#include "TFile.h"
+//#include <iostream>
+//using namespace std;
+//#include <algorithm>
+#include <stdlib.h>
+//#include <iomanip>
+//#include "TChain.h"
+#include "TGraph.h"
+#include "TGraphErrors.h" 
+#include "TMultiGraph.h"
+//#include "TCollection.h"
+//#include "TSystemFile.h"
+//#include "TSystemDirectory.h"
+#include "TLegend.h"
+#include "TCanvas.h"
+//#include "TChainElement.h" 
+//#include "TStyle.h"
+
+// --------------------------------------------------------------------
+//                       MacroTemplate macro definition
+// --------------------------------------------------------------------
+
+class CruzetMacro_TOF_SPT_overlap: public L1Ntuple
+{
+  public :
+
+    //constructor    
+    CruzetMacro_TOF_SPT_overlap(std::string filename) : L1Ntuple(filename) {}
+    CruzetMacro_TOF_SPT_overlap() {}
+    ~CruzetMacro_TOF_SPT_overlap() {}
+
+    //main function macro : arguments can be adpated to your need
+    void run(Long64_t nevents);
+
+  private : 
+
+    //your private methods can be declared here
+};
+
+
+// --------------------------------------------------------------------
+//                             run function 
+// --------------------------------------------------------------------
+void CruzetMacro_TOF_SPT_overlap::run(Long64_t nevents){
+    
+    //load TDR style
+    setTDRStyle();
+
+    //number of events to process
+    if (nevents==-1 || nevents>GetEntries()) nevents=GetEntries();
+    std::cout << nevents << " to process ..." << std::endl;
+    
+    //============
+    //=histograms=
+    //============
+    
+    TH1F *chamber1_bx_plot = new TH1F("chamber1_bx_plot","BX Distribution: Chamber 1",200, 0, 20);//last three defines binnumber, lower and upper limit;
+    TH1F *chamber2_bx_plot = new TH1F("chamber2_bx_plot","BX Distribution: Chamber 2",200, 0, 20);
+    TH1F *chamber3_bx_plot = new TH1F("chamber3_bx_plot","BX Distribution: Chamber 3",200, 0, 20);
+    TH1F *chamber4_bx_plot = new TH1F("chamber4_bx_plot","BX Distribution: Chamber 4",200, 0, 20);
+    TH1F *chamber5_bx_plot = new TH1F("chamber5_bx_plot","BX Distribution: Chamber 5",200, 0, 20);
+    TH1F *chamber6_bx_plot = new TH1F("chamber6_bx_plot","BX Distribution: Chamber 6",200, 0, 20);
+    
+    TH1F *chamber7_bx_plot = new TH1F("chamber7_bx_plot","BX Distribution: Chamber 7",200, 0, 20);
+    TH1F *chamber8_bx_plot = new TH1F("chamber8_bx_plot","BX Distribution: Chamber 8",200, 0, 20);
+    TH1F *chamber9_bx_plot = new TH1F("chamber9_bx_plot","BX Distribution: Chamber 9",200, 0, 20);
+    TH1F *chamber10_bx_plot = new TH1F("chamber10_bx_plot","BX Distribution: Chamber 10",200, 0, 20);
+    TH1F *chamber11_bx_plot = new TH1F("chamber11_bx_plot","BX Distribution: Chamber 11",200, 0, 20);
+    
+    TH1F *chamber12_bx_plot = new TH1F("chamber12_bx_plot","BX Distribution: Chamber 12",200, 0, 20);
+    TH1F *chamber13_bx_plot = new TH1F("chamber13_bx_plot","BX Distribution: Chamber 13",200, 0, 20);
+    TH1F *chamber14_bx_plot = new TH1F("chamber14_bx_plot","BX Distribution: Chamber 14",200, 0, 20);
+    TH1F *chamber15_bx_plot = new TH1F("chamber15_bx_plot","BX Distribution: Chamber 15",200, 0, 20);
+    TH1F *chamber16_bx_plot = new TH1F("chamber16_bx_plot","BX Distribution: Chamber 16",200, 0, 20);
+    
+    TH1F *chamber17_bx_plot = new TH1F("chamber17_bx_plot","BX Distribution: Chamber 17",200, 0, 20);
+    TH1F *chamber18_bx_plot = new TH1F("chamber18_bx_plot","BX Distribution: Chamber 18",200, 0, 20);
+    TH1F *chamber19_bx_plot = new TH1F("chamber19_bx_plot","BX Distribution: Chamber 19",200, 0, 20);
+    TH1F *chamber20_bx_plot = new TH1F("chamber20_bx_plot","BX Distribution: Chamber 20",200, 0, 20);
+    TH1F *chamber21_bx_plot = new TH1F("chamber21_bx_plot","BX Distribution: Chamber 21",200, 0, 20);
+    
+    TH1F *chamber22_bx_plot = new TH1F("chamber22_bx_plot","BX Distribution: Chamber 22",200, 0, 20);
+    TH1F *chamber23_bx_plot = new TH1F("chamber23_bx_plot","BX Distribution: Chamber 23",200, 0, 20);
+    TH1F *chamber24_bx_plot = new TH1F("chamber24_bx_plot","BX Distribution: Chamber 24",200, 0, 20);
+    TH1F *chamber25_bx_plot = new TH1F("chamber25_bx_plot","BX Distribution: Chamber 25",200, 0, 20);
+    TH1F *chamber26_bx_plot = new TH1F("chamber26_bx_plot","BX Distribution: Chamber 26",200, 0, 20);
+    
+    TH1F *chamber27_bx_plot = new TH1F("chamber27_bx_plot","BX Distribution: Chamber 27",200, 0, 20);
+    TH1F *chamber28_bx_plot = new TH1F("chamber28_bx_plot","BX Distribution: Chamber 28",200, 0, 20);
+    TH1F *chamber29_bx_plot = new TH1F("chamber29_bx_plot","BX Distribution: Chamber 29",200, 0, 20);
+    TH1F *chamber30_bx_plot = new TH1F("chamber30_bx_plot","BX Distribution: Chamber 30",200, 0, 20);
+    TH1F *chamber31_bx_plot = new TH1F("chamber31_bx_plot","BX Distribution: Chamber 31",200, 0, 20);
+    
+    TH1F *chamber32_bx_plot = new TH1F("chamber32_bx_plot","BX Distribution: Chamber 32",200, 0, 20);
+    TH1F *chamber33_bx_plot = new TH1F("chamber33_bx_plot","BX Distribution: Chamber 33",200, 0, 20);
+    TH1F *chamber34_bx_plot = new TH1F("chamber34_bx_plot","BX Distribution: Chamber 34",200, 0, 20);
+    TH1F *chamber35_bx_plot = new TH1F("chamber35_bx_plot","BX Distribution: Chamber 35",200, 0, 20);
+    TH1F *chamber36_bx_plot = new TH1F("chamber36_bx_plot","BX Distribution: Chamber 36",200, 0, 20);
+    
+    double chamber_MeanBx[36]={0};
+    
+    //========================================
+    //=histograms for LCTs in overlap region =
+    //========================================
+    //each chamber has left and right neighbour: in ME11 the overlap is 5 strips, i.e., 10 halfstrips
+    //left overlap
+    TH1F *chamber1l_bx_plot = new TH1F("chamber1l_bx_plot","BX Distribution: Chamber 1l",200, 0, 20);
+    TH1F *chamber2l_bx_plot = new TH1F("chamber2l_bx_plot","BX Distribution: Chamber 2l",200, 0, 20);
+    TH1F *chamber3l_bx_plot = new TH1F("chamber3l_bx_plot","BX Distribution: Chamber 3l",200, 0, 20);
+    TH1F *chamber4l_bx_plot = new TH1F("chamber4l_bx_plot","BX Distribution: Chamber 4l",200, 0, 20);
+    TH1F *chamber5l_bx_plot = new TH1F("chamber5l_bx_plot","BX Distribution: Chamber 5l",200, 0, 20);
+    TH1F *chamber6l_bx_plot = new TH1F("chamber6l_bx_plot","BX Distribution: Chamber 6l",200, 0, 20);
+    
+    TH1F *chamber7l_bx_plot = new TH1F("chamber7l_bx_plot","BX Distribution: Chamber 7l",200, 0, 20);
+    TH1F *chamber8l_bx_plot = new TH1F("chamber8l_bx_plot","BX Distribution: Chamber 8l",200, 0, 20);
+    TH1F *chamber9l_bx_plot = new TH1F("chamber9l_bx_plot","BX Distribution: Chamber 9l",200, 0, 20);
+    TH1F *chamber10l_bx_plot = new TH1F("chamber10l_bx_plot","BX Distribution: Chamber 10l",200, 0, 20);
+    TH1F *chamber11l_bx_plot = new TH1F("chamber11l_bx_plot","BX Distribution: Chamber 11l",200, 0, 20);
+    
+    TH1F *chamber12l_bx_plot = new TH1F("chamber12l_bx_plot","BX Distribution: Chamber 12l",200, 0, 20);
+    TH1F *chamber13l_bx_plot = new TH1F("chamber13l_bx_plot","BX Distribution: Chamber 13l",200, 0, 20);
+    TH1F *chamber14l_bx_plot = new TH1F("chamber14l_bx_plot","BX Distribution: Chamber 14l",200, 0, 20);
+    TH1F *chamber15l_bx_plot = new TH1F("chamber15l_bx_plot","BX Distribution: Chamber 15l",200, 0, 20);
+    TH1F *chamber16l_bx_plot = new TH1F("chamber16l_bx_plot","BX Distribution: Chamber 16l",200, 0, 20);
+    
+    TH1F *chamber17l_bx_plot = new TH1F("chamber17l_bx_plot","BX Distribution: Chamber 17l",200, 0, 20);
+    TH1F *chamber18l_bx_plot = new TH1F("chamber18l_bx_plot","BX Distribution: Chamber 18l",200, 0, 20);
+    TH1F *chamber19l_bx_plot = new TH1F("chamber19l_bx_plot","BX Distribution: Chamber 19l",200, 0, 20);
+    TH1F *chamber20l_bx_plot = new TH1F("chamber20l_bx_plot","BX Distribution: Chamber 20l",200, 0, 20);
+    TH1F *chamber21l_bx_plot = new TH1F("chamber21l_bx_plot","BX Distribution: Chamber 21l",200, 0, 20);
+    
+    TH1F *chamber22l_bx_plot = new TH1F("chamber22l_bx_plot","BX Distribution: Chamber 22l",200, 0, 20);
+    TH1F *chamber23l_bx_plot = new TH1F("chamber23l_bx_plot","BX Distribution: Chamber 23l",200, 0, 20);
+    TH1F *chamber24l_bx_plot = new TH1F("chamber24l_bx_plot","BX Distribution: Chamber 24l",200, 0, 20);
+    TH1F *chamber25l_bx_plot = new TH1F("chamber25l_bx_plot","BX Distribution: Chamber 25l",200, 0, 20);
+    TH1F *chamber26l_bx_plot = new TH1F("chamber26l_bx_plot","BX Distribution: Chamber 26l",200, 0, 20);
+    
+    TH1F *chamber27l_bx_plot = new TH1F("chamber27l_bx_plot","BX Distribution: Chamber 27l",200, 0, 20);
+    TH1F *chamber28l_bx_plot = new TH1F("chamber28l_bx_plot","BX Distribution: Chamber 28l",200, 0, 20);
+    TH1F *chamber29l_bx_plot = new TH1F("chamber29l_bx_plot","BX Distribution: Chamber 29l",200, 0, 20);
+    TH1F *chamber30l_bx_plot = new TH1F("chamber30l_bx_plot","BX Distribution: Chamber 30l",200, 0, 20);
+    TH1F *chamber31l_bx_plot = new TH1F("chamber31l_bx_plot","BX Distribution: Chamber 31l",200, 0, 20);
+    
+    TH1F *chamber32l_bx_plot = new TH1F("chamber32l_bx_plot","BX Distribution: Chamber 32l",200, 0, 20);
+    TH1F *chamber33l_bx_plot = new TH1F("chamber33l_bx_plot","BX Distribution: Chamber 33l",200, 0, 20);
+    TH1F *chamber34l_bx_plot = new TH1F("chamber34l_bx_plot","BX Distribution: Chamber 34l",200, 0, 20);
+    TH1F *chamber35l_bx_plot = new TH1F("chamber35l_bx_plot","BX Distribution: Chamber 35l",200, 0, 20);
+    TH1F *chamber36l_bx_plot = new TH1F("chamber36l_bx_plot","BX Distribution: Chamber 36l",200, 0, 20);
+    
+    //right overlap
+    TH1F *chamber1r_bx_plot = new TH1F("chamber1r_bx_plot","BX Distribution: Chamber 1r",200, 0, 20);
+    TH1F *chamber2r_bx_plot = new TH1F("chamber2r_bx_plot","BX Distribution: Chamber 2r",200, 0, 20);
+    TH1F *chamber3r_bx_plot = new TH1F("chamber3r_bx_plot","BX Distribution: Chamber 3r",200, 0, 20);
+    TH1F *chamber4r_bx_plot = new TH1F("chamber4r_bx_plot","BX Distribution: Chamber 4r",200, 0, 20);
+    TH1F *chamber5r_bx_plot = new TH1F("chamber5r_bx_plot","BX Distribution: Chamber 5r",200, 0, 20);
+    TH1F *chamber6r_bx_plot = new TH1F("chamber6r_bx_plot","BX Distribution: Chamber 6r",200, 0, 20);
+    
+    TH1F *chamber7r_bx_plot = new TH1F("chamber7r_bx_plot","BX Distribution: Chamber 7r",200, 0, 20);
+    TH1F *chamber8r_bx_plot = new TH1F("chamber8r_bx_plot","BX Distribution: Chamber 8r",200, 0, 20);
+    TH1F *chamber9r_bx_plot = new TH1F("chamber9r_bx_plot","BX Distribution: Chamber 9r",200, 0, 20);
+    TH1F *chamber10r_bx_plot = new TH1F("chamber10r_bx_plot","BX Distribution: Chamber 10r",200, 0, 20);
+    TH1F *chamber11r_bx_plot = new TH1F("chamber11r_bx_plot","BX Distribution: Chamber 11r",200, 0, 20);
+    
+    TH1F *chamber12r_bx_plot = new TH1F("chamber12r_bx_plot","BX Distribution: Chamber 12r",200, 0, 20);
+    TH1F *chamber13r_bx_plot = new TH1F("chamber13r_bx_plot","BX Distribution: Chamber 13r",200, 0, 20);
+    TH1F *chamber14r_bx_plot = new TH1F("chamber14r_bx_plot","BX Distribution: Chamber 14r",200, 0, 20);
+    TH1F *chamber15r_bx_plot = new TH1F("chamber15r_bx_plot","BX Distribution: Chamber 15r",200, 0, 20);
+    TH1F *chamber16r_bx_plot = new TH1F("chamber16r_bx_plot","BX Distribution: Chamber 16r",200, 0, 20);
+    
+    TH1F *chamber17r_bx_plot = new TH1F("chamber17r_bx_plot","BX Distribution: Chamber 17r",200, 0, 20);
+    TH1F *chamber18r_bx_plot = new TH1F("chamber18r_bx_plot","BX Distribution: Chamber 18r",200, 0, 20);
+    TH1F *chamber19r_bx_plot = new TH1F("chamber19r_bx_plot","BX Distribution: Chamber 19r",200, 0, 20);
+    TH1F *chamber20r_bx_plot = new TH1F("chamber20r_bx_plot","BX Distribution: Chamber 20r",200, 0, 20);
+    TH1F *chamber21r_bx_plot = new TH1F("chamber21r_bx_plot","BX Distribution: Chamber 21r",200, 0, 20);
+    
+    TH1F *chamber22r_bx_plot = new TH1F("chamber22r_bx_plot","BX Distribution: Chamber 22r",200, 0, 20);
+    TH1F *chamber23r_bx_plot = new TH1F("chamber23r_bx_plot","BX Distribution: Chamber 23r",200, 0, 20);
+    TH1F *chamber24r_bx_plot = new TH1F("chamber24r_bx_plot","BX Distribution: Chamber 24r",200, 0, 20);
+    TH1F *chamber25r_bx_plot = new TH1F("chamber25r_bx_plot","BX Distribution: Chamber 25r",200, 0, 20);
+    TH1F *chamber26r_bx_plot = new TH1F("chamber26r_bx_plot","BX Distribution: Chamber 26r",200, 0, 20);
+    
+    TH1F *chamber27r_bx_plot = new TH1F("chamber27r_bx_plot","BX Distribution: Chamber 27r",200, 0, 20);
+    TH1F *chamber28r_bx_plot = new TH1F("chamber28r_bx_plot","BX Distribution: Chamber 28r",200, 0, 20);
+    TH1F *chamber29r_bx_plot = new TH1F("chamber29r_bx_plot","BX Distribution: Chamber 29r",200, 0, 20);
+    TH1F *chamber30r_bx_plot = new TH1F("chamber30r_bx_plot","BX Distribution: Chamber 30r",200, 0, 20);
+    TH1F *chamber31r_bx_plot = new TH1F("chamber31r_bx_plot","BX Distribution: Chamber 31r",200, 0, 20);
+    
+    TH1F *chamber32r_bx_plot = new TH1F("chamber32r_bx_plot","BX Distribution: Chamber 32r",200, 0, 20);
+    TH1F *chamber33r_bx_plot = new TH1F("chamber33r_bx_plot","BX Distribution: Chamber 33r",200, 0, 20);
+    TH1F *chamber34r_bx_plot = new TH1F("chamber34r_bx_plot","BX Distribution: Chamber 34r",200, 0, 20);
+    TH1F *chamber35r_bx_plot = new TH1F("chamber35r_bx_plot","BX Distribution: Chamber 35r",200, 0, 20);
+    TH1F *chamber36r_bx_plot = new TH1F("chamber36r_bx_plot","BX Distribution: Chamber 36r",200, 0, 20);
+    
+    //store left and right mean for all chambers
+    double chamber_left_MeanBx[36]={0};
+    double chamber_right_MeanBx[36]={0};
+    double relative_MeanBx[36]={0};//IN CASE SOME CHAMBERS HAS NO LCTs
+    for(int i=0;i<36;i++){
+        relative_MeanBx[i]=-2;
+    
+    }
+    double chamber_left_MeanBx_for_plot[36]={0};
+    
+    //==========================================
+    //=global value for applying TOF correction=
+    //==========================================
+    //transform global phi and eta from bit form to decimal number
+    //globalphi(-pi,pi) are devided by 4096, globaleta(0.9,2.4) is devided by 126(?could be 128)
+    double Pi=3.14159;
+    double step_phi=Pi*2/4096;
+    double step_eta=(2.4-0.9)/126;
+    double level_arm_ME1_1=6;//z coordinate of the station(can be more precise, unit is meter);
+    double level_arm_ME2=8.2;
+    double level_arm_ME3=9.4;
+    Long64_t light_velocity=300000000;
+    double unit_bx=2.5*pow(10,-8);
+    Long64_t selected_event[15000]={0};
+    Long64_t selected_event_i=0;
+    
+    //============================================================
+    //=global value of chamber parameters to apply SPT correction=
+    //============================================================
+    //refer active area in Table 4.4.1 in LHCC-97-032.pdf: all units in meters;
+    double ME1_1_top_width=0.487;
+    double ME1_1_bottom_width=0.201;
+    /*
+    double ME2_1_top_width=1.254;
+    double ME2_1_bottom_width=0.534;
+    double ME3_1_top_width=1.254;
+    double ME3_1_bottom_width=0.617;
+    double ME234_2_top_width=1.270;
+    double ME234_2_bottom_width=0.666;
+    */
+    //wire groups: each group has different wires
+    //wire tilt by 25 degrees for ME11
+    int ME1_1_wire_channels=48;
+    /*
+    int ME2_1_wire_channels=112;
+    int ME3_1_wire_channels=96;
+    int ME234_2_wire_channels=64;
+    */
+    //strip channels/#s
+    int ME1_1_A_strip_channels=48;//half strip 96(129:224)
+    int ME1_1_B_strip_channels=64;//half strip 128(1:128)
+    /*
+    int ME2_1_strip_channels=80;//half strip(1:160)
+    int ME3_1_strip_channels=80;//half strip(1:160)
+    int ME234_2_strip_channels=80;//half strip(1:160)
+    */
+    
+    //======================
+    //=loop over the events=
+    //======================
+    for (Long64_t ievent=0; ievent<nevents; ievent++){//avoid use of i, be specific
+        //load the i-th event
+        Long64_t ientry = LoadTree(ievent); if (ientry < 0) break;
+        GetEntry(ievent);
+        cout<<"============"<<endl;
+        
+        //process progress
+        if(ievent!=0 && (ievent%10000)==0)
+        std::cout << "- processing event " << ievent << "\r" << std::flush;
+        
+        //==============================================
+        //=print out LCTs size and initialize variables=
+        //==============================================
+        cout<<"Event #"<< ievent <<" has "<< csctf_->lctChamber.size() <<" LCT(s)!" <<endl;
+        int numlct_ME1_1=0;//number of lct in ME+1/1 that is to be synchronised in each event
+        int numlct_ME2=0;//number of lct in ME+2 station registered at BX=6 in each event
+        int numlct_ME3=0;//number of lct in ME+3 station registered at BX=6 in each event
+        int event_flag=0;//mark selected event when event_flag=1
+        int lct_flag=0;//mark two lcts in ME+1/1
+        int ME2_lct_chamber=0;
+        int ME3_lct_chamber=0;
+        int ME2_lct_ring=0;
+        int ME3_lct_ring=0;
+        
+        /*
+        int ME2_lct_strip=0;//will be used for SPT correction: the strip information is half strip, ME2 have 80*2=160 half strips(1:160)
+        int ME3_lct_strip=0;//ME3 have 80*2=160 strips(1:160)
+        int ME2_lct_wire=0;//ME2 has 112 wires(1:112)
+        int ME3_lct_wire=0;//ME3 has 112 wires(1:112)
+        */
+        int first_lct_strip=0;//ME11b has 64*2=128 half strips(1:128), ME11a has 48*2=96 half strips(129:224)
+        int second_lct_strip=0;
+        int lct_strip[2]={0};
+        int first_lct_wire=0;//ME11 has 48 wires(1:48)
+        int second_lct_wire=0;
+        
+        int first_lct_chamber=0;//this takes first lct's chamber number in ME+1/1
+        int second_lct_chamber=0;//this takes the seocnd lct's chamber number in ME+1/1
+        int lct_chamber[2]={0};//this store two lcts in ME+1/1 to convenient the histograms fill
+        double first_lct_bx=0;
+        double second_lct_bx=0;
+        double lct_bx[2]={0};//this stores two lcts in ME+1/1 to convenient the histograms filling
+        double first_lct_phi=-999;//this takes phi coordinate of 1st lct in ME+1/1
+        double first_lct_eta=-999;//this takes eta coordinate of 1st lct in ME+1/1
+        double second_lct_phi=-999;//this takes phi coordinate of 2nd lct in ME+1/1
+        double second_lct_eta=-999;//this takes eta coordinate of 2nd lct in ME+1/1
+        double ME2_lct_eta=-999;//this takes eta coordinate of the lct in ME2(if there is exactly one in a event, otherwise it's the last lct's)
+        double ME2_lct_phi=-999;//this takes phi coordinate of the lct in ME2, initialize to 0 is not a good choice
+        double ME3_lct_eta=-999;//this takes eta coordinate of the lct in ME3
+        double ME3_lct_phi=-999;//this takes phi coordinate of the lct in ME3
+        double ME1_1_lct_eta=-999;
+        double ME1_1_lct_phi=-999;
+        
+        
+        //==========================================
+        //=Initialize cartisian coordinates for TOF=
+        //==========================================
+        double ME2_lct_tan_theta=0;
+        double ME3_lct_tan_theta=0;
+        double first_lct_tan_theta=0;
+        double second_lct_tan_theta=0;
+        double ME2_lct_x=0;
+        double ME2_lct_y=0;
+        double ME2_lct_z=0;
+        double ME3_lct_x=0;
+        double ME3_lct_y=0;
+        double ME3_lct_z=0;
+        double first_lct_x=0;
+        double first_lct_y=0;
+        double first_lct_z=0;
+        double second_lct_x=0;
+        double second_lct_y=0;
+        double second_lct_z=0;
+        double distance_0_3=0;
+        double distance_0_2=0;
+        double first_lct_distance_0_1=0;
+        double first_lct_distance_1_2=0;
+        double first_lct_distance_1_3=0;
+        double second_lct_distance_0_1=0;
+        double second_lct_distance_1_2=0;
+        double second_lct_distance_1_3=0;
+        
+        //=================================================
+        //=Signal Propagation Distance(SPD) initialization=
+        //=================================================
+        
+        double first_lct_SPD=0;
+        double second_lct_SPD=0;
+        
+        //================================
+        //event selection for correction =
+        //================================
+        //loop over LCT in each event: require 1 lct in ME2 and 1 lct in ME3 and 2 neighbouring lcts in ME1/1(not 4 lcts in total for one event, lcts can be in other stations)
+        //be aware of duplicate lcts, could happen;
+        for(int ilct=0;ilct<csctf_->lctChamber.size();ilct++){
+            
+            //print out all LCTs' info in an event
+            cout<<"LCT #" << ilct <<": Endcap= "<<csctf_->lctEndcap[ilct]<<", Station= "<<csctf_->lctStation[ilct]<<", Ring= "<<csctf_->lctRing[ilct]<<", Chamber= "<<csctf_->lctChamber[ilct]<<", Bx= "<<csctf_->lctBx[ilct]<<", Strip Number= "<<csctf_->lctstripNum[ilct]<<", Wire Group= "<<csctf_->lctwireGroup[ilct]<<", Global Eta= "<<csctf_->lctglobalEta[ilct]<<", Global Phi= "<<csctf_->lctglobalPhi[ilct]<<endl;
+            
+            //event selection: these selection criteria are true for TOF and SPTcorrection
+            if(csctf_->lctEndcap[ilct]==1){
+                cout<<"LCT in +Endcap!"<<endl;
+                
+                //======
+                //=ME+2=
+                //======
+                if(csctf_->lctStation[ilct]==2 && csctf_->lctBx[ilct]==6){
+                    
+                    //consider duplicate lcts: endcap, station, ring, chamber, bx, phi, eta; we don't compare wire and strip here.
+                    if(ME2_lct_phi == -Pi+csctf_->lctglobalPhi[ilct]*step_phi && ME2_lct_eta == 0.9+csctf_->lctglobalEta[ilct]*step_eta && ME2_lct_ring == csctf_->lctRing[ilct] && ME2_lct_chamber== csctf_->lctChamber[ilct]){
+                        
+                        cout<<"Duplicate lcts in ME2."<<endl;
+                    
+                    }
+                    //better get coordinates here or you'll need to loop again after event selection
+                    else{
+                        numlct_ME2++;
+                        ME2_lct_phi=-Pi+csctf_->lctglobalPhi[ilct]*step_phi;
+                        ME2_lct_eta=0.9+csctf_->lctglobalEta[ilct]*step_eta;
+                        ME2_lct_ring=csctf_->lctRing[ilct];
+                        ME2_lct_chamber=csctf_->lctChamber[ilct];
+                        cout<<"LCT in ME+2 at BX=6!"<<endl;
+                    }
+                    
+                }
+                
+                //=====
+                //=ME3=
+                //=====
+                if(csctf_->lctStation[ilct]==3 && csctf_->lctBx[ilct]==6){
+                    
+                    //consider duplicate lcts: endcap, station, ring, chamber, bx, phi, eta; we don't compare wire and strip here.
+                    if(ME3_lct_phi == -Pi+csctf_->lctglobalPhi[ilct]*step_phi && ME3_lct_eta == 0.9+csctf_->lctglobalEta[ilct]*step_eta && ME3_lct_ring == csctf_->lctRing[ilct] && ME3_lct_chamber== csctf_->lctChamber[ilct]){
+    
+                        cout<<"Duplicate lcts in ME3."<<endl;
+    
+                    }
+                    //get coordinates
+                    else{
+                        numlct_ME3++;
+                        ME3_lct_phi=-Pi+csctf_->lctglobalPhi[ilct]*step_phi;
+                        ME3_lct_eta=0.9+csctf_->lctglobalEta[ilct]*step_eta;
+                        ME3_lct_ring=csctf_->lctRing[ilct];
+                        ME3_lct_chamber=csctf_->lctChamber[ilct];
+                        cout<<"LCT in ME+3 at BX=6!"<<endl;
+                    }
+                }
+                
+                //========
+                //=ME+1/1=
+                //========
+                //ME+1/1 was upgraded
+                if(csctf_->lctStation[ilct]==1 && csctf_->lctRing[ilct]==1){
+                    
+                    if((first_lct_phi == -Pi+csctf_->lctglobalPhi[ilct]*step_phi && first_lct_eta == 0.9+csctf_->lctglobalEta[ilct]*step_eta && first_lct_chamber == csctf_->lctChamber[ilct] && first_lct_bx == csctf_->lctBx[ilct]) || (second_lct_phi == -Pi+csctf_->lctglobalPhi[ilct]*step_phi && second_lct_eta == 0.9+csctf_->lctglobalEta[ilct]*step_eta && second_lct_chamber == csctf_->lctChamber[ilct] && second_lct_bx == csctf_->lctBx[ilct]) ){
+                        
+                        cout<<"Duplicate lcts in ME11."<<endl;
+                    }
+                    else{
+                        numlct_ME1_1++;
+                        if(lct_flag==0){
+                            //get coordinates and timing info here
+                            first_lct_chamber = csctf_->lctChamber[ilct];
+                            first_lct_phi=-Pi+csctf_->lctglobalPhi[ilct]*step_phi;
+                            first_lct_eta=0.9+csctf_->lctglobalEta[ilct]*step_eta;
+                            first_lct_bx=csctf_->lctBx[ilct];
+                            first_lct_strip=csctf_->lctstripNum[ilct];
+                            first_lct_wire=csctf_->lctwireGroup[ilct];
+                            lct_flag=1;
+                            cout<<"First lct in ME+1/1 in Chamber: "<<csctf_->lctChamber[ilct]<<endl;
+                        }
+                        else if(lct_flag==1){
+                            second_lct_chamber = csctf_->lctChamber[ilct];
+                            second_lct_phi=-Pi+csctf_->lctglobalPhi[ilct]*step_phi;
+                            second_lct_eta=0.9+csctf_->lctglobalEta[ilct]*step_eta;
+                            second_lct_bx=csctf_->lctBx[ilct];
+                            second_lct_strip=csctf_->lctstripNum[ilct];
+                            second_lct_wire=csctf_->lctwireGroup[ilct];
+                            lct_flag=2;
+                            cout<<"Second lct in ME+1/1 in Chamber: "<<csctf_->lctChamber[ilct]<<endl;
+                        }
+                    }//end else
+                    
+                }//end if ME11
+                
+            }//end if endcap
+            
+        }//end for loop over lct in a event
+        
+        cout<<"Loop over all LCTs in this event finished!"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<numlct_ME1_1<<" LCT(s) in ME+1/1, "<<numlct_ME2<<" LCT(s) in ME+2 at BX=6, "<<numlct_ME3<<" LCT(s) in ME+3 at BX=6;"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        
+        //===========================================================
+        //=decide if two LCTs in ME+1/1 are in neighbouring chambers=
+        //===========================================================
+        if(numlct_ME3==1 && numlct_ME2==1 && numlct_ME1_1==2){
+            cout<<"Deciding if 2 LCTs in ME+1/1 are in neighbouring chambers..."<<endl;
+            
+            if(first_lct_chamber==second_lct_chamber+1 || first_lct_chamber==second_lct_chamber-1){
+                //change flag to 1
+                event_flag=1;
+                cout<<"2 LCTs are in neighbouring chambers!"<<endl;
+            }
+            else{
+                cout<<"2 LCTs are NOT in neighbouring chambers!"<<endl;
+                }
+            
+        }//end if
+        
+        //decide if this event is selected
+        if(event_flag==1){
+            
+            //=================
+            //Selected events =
+            //=================
+            cout<<">>>>>>>>>>>>>>>>>>>"<<endl;
+            cout<<"Event "<<ievent<<" selected!"<<endl;
+            selected_event[selected_event_i]=ievent;
+            selected_event_i++;
+            
+            //========================================================
+            //=transform spherical into cartisian for TOF convenience=
+            //========================================================
+            //(r,theta, phi)-->(x,y,z)
+            //z=r*cos(theta)-->r=z/cos(theta),x=r*sin(theta)*cos(phi)=z*tan(theta)*cos(phi),y=r*sin(theta)*sin(phi)=z*tan(theta)*sin(phi);
+            //tan(theta)=tan(2*theta/2)=2*tan(theta/2)/[1-{tan(theta/2)]^2};
+            //tan(theta/2)=exp(-eta);(eta definition)
+            //level-arm coordinnate z: ME+1/1= 6 m; ME2=8.2 m; ME3=9.4 m(rough estimate, could be raw)
+            ME2_lct_tan_theta=2*exp(-ME2_lct_eta)/(1-exp(-2*ME2_lct_eta));
+            ME3_lct_tan_theta=2*exp(-ME3_lct_eta)/(1-exp(-2*ME3_lct_eta));
+            first_lct_tan_theta=2*exp(-first_lct_eta)/(1-exp(-2*first_lct_eta));
+            second_lct_tan_theta=2*exp(-second_lct_eta)/(1-exp(-2*second_lct_eta));
+            ME2_lct_x=level_arm_ME2*ME2_lct_tan_theta*cos(ME2_lct_phi);
+            ME2_lct_y=level_arm_ME2*ME2_lct_tan_theta*sin(ME2_lct_phi);
+            ME2_lct_z=level_arm_ME2;
+            ME3_lct_x=level_arm_ME3*ME3_lct_tan_theta*cos(ME3_lct_phi);
+            ME3_lct_y=level_arm_ME3*ME3_lct_tan_theta*sin(ME3_lct_phi);
+            ME3_lct_z=level_arm_ME3;
+            first_lct_x=level_arm_ME1_1*first_lct_tan_theta*cos(first_lct_phi);
+            first_lct_y=level_arm_ME1_1*first_lct_tan_theta*sin(first_lct_phi);
+            first_lct_z=level_arm_ME1_1;
+            second_lct_x=level_arm_ME1_1*second_lct_tan_theta*cos(second_lct_phi);
+            second_lct_y=level_arm_ME1_1*second_lct_tan_theta*sin(second_lct_phi);
+            second_lct_z=level_arm_ME1_1;
+            
+            cout<<"Coordinates of 4 LCTs:"<<endl;
+            cout<<"LCT in ME2: phi= "<<ME2_lct_phi<<", eta= "<<ME2_lct_eta<<", x= "<<ME2_lct_x<<", y= "<<ME2_lct_y<<", z= "<<ME2_lct_z<<endl;
+            cout<<"LCT in ME3: phi= "<<ME3_lct_phi<<", eta= "<<ME3_lct_eta<<", x= "<<ME3_lct_x<<", y= "<<ME3_lct_y<<", z= "<<ME3_lct_z<<endl;
+            cout<<"1st LCT in ME+1/1: phi= "<<first_lct_phi<<", eta= "<<first_lct_eta<<", x= "<<first_lct_x<<", y= "<<first_lct_y<<", z= "<<first_lct_z<<", chamber= "<<first_lct_chamber<<", bx= "<<first_lct_bx<<endl;
+            cout<<"2nd LCT in ME+1/1: phi= "<<second_lct_phi<<", eta= "<<second_lct_eta<<", x= "<<second_lct_x<<", y= "<<second_lct_y<<", z= "<<second_lct_z<<", chamber= "<<second_lct_chamber<<", bx= "<<second_lct_bx<<endl;
+            
+            //=============================================
+            //=calculate distance and apply TOF correction=
+            //=============================================
+            //decide which one in ME2 and ME3 to use:compare y coordinate
+            //---------------------------------------------
+            //|backwards case: towards IP, use LCT in ME3  |
+            //---------------------------------------------
+            if(ME3_lct_y>=ME2_lct_y){
+                distance_0_3=sqrt(pow(ME3_lct_x,2)+pow(ME3_lct_y,2)+pow(ME3_lct_z,2));
+                first_lct_distance_0_1=sqrt(pow(first_lct_x,2)+pow(first_lct_y,2)+pow(first_lct_z,2));
+                first_lct_distance_1_3=sqrt(pow(first_lct_x-ME3_lct_x,2)+pow(first_lct_y-ME3_lct_y,2)+pow(first_lct_z-ME3_lct_z,2));
+                second_lct_distance_0_1=sqrt(pow(second_lct_x,2)+pow(second_lct_y,2)+pow(second_lct_z,2));
+                second_lct_distance_1_3=sqrt(pow(second_lct_x-ME3_lct_x,2)+pow(second_lct_y-ME3_lct_y,2)+pow(second_lct_z-ME3_lct_z,2));
+                
+                //TOF correction: forward and backward case have different correction
+                first_lct_bx=first_lct_bx+(-distance_0_3+first_lct_distance_0_1+first_lct_distance_1_3)/(light_velocity*unit_bx);
+                second_lct_bx=second_lct_bx+(-distance_0_3+second_lct_distance_0_1+second_lct_distance_1_3)/(light_velocity*unit_bx);
+            }
+            //----------------------------------------
+            //|forwards case: away IP, use LCT in ME2 |
+            //----------------------------------------
+            else{
+                
+                distance_0_2=sqrt(pow(ME2_lct_x,2)+pow(ME2_lct_y,2)+pow(ME2_lct_z,2));
+                first_lct_distance_0_1=sqrt(pow(first_lct_x,2)+pow(first_lct_y,2)+pow(first_lct_z,2));
+                first_lct_distance_1_2=sqrt(pow(first_lct_x-ME2_lct_x,2)+pow(first_lct_y-ME2_lct_y,2)+pow(first_lct_z-ME2_lct_z,2));
+                second_lct_distance_0_1=sqrt(pow(second_lct_x,2)+pow(second_lct_y,2)+pow(second_lct_z,2));
+                second_lct_distance_1_2=sqrt(pow(second_lct_x-ME2_lct_x,2)+pow(second_lct_y-ME2_lct_y,2)+pow(second_lct_z-ME2_lct_z,2));
+                
+                //TOF correction and divide by 25 ns=2.5*10^-8 s to get BX unit
+                first_lct_bx=first_lct_bx+(-distance_0_2+first_lct_distance_0_1-first_lct_distance_1_2)/(light_velocity*unit_bx);
+                second_lct_bx=second_lct_bx+(-distance_0_2+second_lct_distance_0_1-second_lct_distance_1_2)/(light_velocity*unit_bx);
+            }//end if for deciding muon direction
+            
+            cout<<"****Only TOF correction****"<<endl;
+            cout<<"1st LCT in ME+1/1: bx= "<<first_lct_bx<<endl;
+            cout<<"2nd LCT in ME+1/1: bx= "<<second_lct_bx<<endl;
+            
+            //========================================
+            //=SPT correction:calculate SPD and apply=
+            //========================================
+            //decide 1st lcts in ME1/1A or ME1/1B
+            if(first_lct_strip>=1 && first_lct_strip<=ME1_1_B_strip_channels*2){
+                //in ME1/1B
+                first_lct_SPD=(ME1_1_B_strip_channels*2-first_lct_strip)*(ME1_1_bottom_width+(ME1_1_top_width-ME1_1_bottom_width)*first_lct_wire/ME1_1_wire_channels)/(ME1_1_B_strip_channels*2);
+        
+            }
+            else if(first_lct_strip>=ME1_1_B_strip_channels*2+1 && first_lct_strip <= ME1_1_B_strip_channels*2+ME1_1_A_strip_channels*2){
+                //in ME1/1A
+                first_lct_SPD=(first_lct_strip-ME1_1_B_strip_channels*2-1)*(ME1_1_bottom_width+(ME1_1_top_width-ME1_1_bottom_width)*first_lct_wire/ME1_1_wire_channels)/(ME1_1_A_strip_channels*2);
+            }
+            //decide 2nd lct in ME1/1A or ME1/1B
+            if(second_lct_strip>=1 && second_lct_strip<=ME1_1_B_strip_channels*2){
+                //in ME1/1B
+                second_lct_SPD=(ME1_1_B_strip_channels*2-second_lct_strip)*(ME1_1_bottom_width+(ME1_1_top_width-ME1_1_bottom_width)*second_lct_wire/ME1_1_wire_channels)/(ME1_1_B_strip_channels*2);
+                
+            }
+            else if(second_lct_strip>=ME1_1_B_strip_channels*2+1 && second_lct_strip <= ME1_1_B_strip_channels*2+ME1_1_A_strip_channels*2){
+                //in ME1/1A
+                second_lct_SPD=(second_lct_strip-ME1_1_B_strip_channels*2-1)*(ME1_1_bottom_width+(ME1_1_top_width-ME1_1_bottom_width)*second_lct_wire/ME1_1_wire_channels)/(ME1_1_A_strip_channels*2);
+            }
+            
+            first_lct_bx= first_lct_bx+first_lct_SPD/(light_velocity*unit_bx);
+            second_lct_bx= second_lct_bx+second_lct_SPD/(light_velocity*unit_bx);
+            cout<<"****TOF and SPT correction****"<<endl;
+            cout<<"1st LCT in ME+1/1: bx= "<<first_lct_bx<<endl;
+            cout<<"2nd LCT in ME+1/1: bx= "<<second_lct_bx<<endl;
+            
+            lct_chamber[0]=first_lct_chamber;
+            lct_chamber[1]=second_lct_chamber;
+            lct_bx[0]=first_lct_bx;
+            lct_bx[1]=second_lct_bx;
+            lct_strip[0]=first_lct_strip;
+            lct_strip[1]=second_lct_strip;
+            
+            
+            for(int i=0;i<2;i++){
+                //decide overlap in left or right
+                int left=0;
+                int right=0;
+                if((lct_strip[i]>=1 && lct_strip[i]<=10) || (lct_strip[i]>=215 && lct_strip[i]<=224)){
+                    left=1;
+                    cout<<"left overlap"<<endl;
+                }
+                else if((lct_strip[i]>=119 && lct_strip[i]<=128) || (lct_strip[i]>=129 && lct_strip[i]<=138)){
+                    right=1;
+                    cout<<"right overlap"<<endl;
+                }
+                
+                switch(lct_chamber[i]){
+                    case 1:
+                        chamber1_bx_plot->Fill(lct_bx[i]);//this specifies chamber1 in ME+1/1, the upgrade is in ME+1/1
+                        if(left==1) chamber1l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber1r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 2:
+                        chamber2_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber2l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber2r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 3:
+                        chamber3_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber3l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber3r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 4:
+                        chamber4_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber4l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber4r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 5:
+                        chamber5_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber5l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber5r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 6:
+                        chamber6_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber6l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber6r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 7:
+                        chamber7_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber7l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber7r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 8:
+                        chamber8_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber8l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber8r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 9:
+                        chamber9_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber9l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber9r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 10:
+                        chamber10_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber10l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber10r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 11:
+                        chamber11_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber11l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber11r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 12:
+                        chamber12_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber12l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber12r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 13:
+                        chamber13_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber13l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber13r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 14:
+                        chamber14_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber14l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber14r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 15:
+                        chamber15_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber15l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber15r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 16:
+                        chamber16_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber16l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber16r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 17:
+                        chamber17_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber17l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber17r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 18:
+                        chamber18_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber18l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber18r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 19:
+                        chamber19_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber19l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber19r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 20:
+                        chamber20_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber20l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber20r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 21:
+                        chamber21_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber21l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber21r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 22:
+                        chamber22_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber22l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber22r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 23:
+                        chamber23_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber23l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber23r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 24:
+                        chamber24_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber24l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber24r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 25:
+                        chamber25_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber25l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber25r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 26:
+                        chamber26_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber26l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber26r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 27:
+                        chamber27_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber27l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber27r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 28:
+                        chamber28_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber28l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber28r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 29:
+                        chamber29_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber29l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber29r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 30:
+                        chamber30_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber30l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber30r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 31:
+                        chamber31_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber31l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber31r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 32:
+                        chamber32_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber32l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber32r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 33:
+                        chamber33_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber33l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber33r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 34:
+                        chamber34_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber34l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber34r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 35:
+                        chamber35_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber35l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber35r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    case 36:
+                        chamber36_bx_plot->Fill(lct_bx[i]);
+                        if(left==1) chamber36l_bx_plot->Fill(lct_bx[i]);
+                        if(right==1) chamber36r_bx_plot->Fill(lct_bx[i]);
+                        break;
+                    default:
+                        break;
+                }//end switch
+                cout<<"One LCT in ME+1/1 filled."<<endl;
+            }//end for i loop
+                                             
+        }//end if for selected events
+        else{
+            cout<<"Event "<<ievent<<" discarded!"<<endl;
+        }//end else for discarded events
+        
+  }//end for loop events
+    
+    cout<<"==========="<<endl;
+    cout<<"Events loop over and writing plots..."<<endl;
+    chamber_MeanBx[0]=chamber1_bx_plot->GetMean(1);//this is an easy way to get mean BX,1 means x axis,2 means y,3 means z;
+    chamber_MeanBx[1]=chamber2_bx_plot->GetMean(1);
+    chamber_MeanBx[2]=chamber3_bx_plot->GetMean(1);
+    chamber_MeanBx[3]=chamber4_bx_plot->GetMean(1);
+    chamber_MeanBx[4]=chamber5_bx_plot->GetMean(1);
+    chamber_MeanBx[5]=chamber6_bx_plot->GetMean(1);
+    chamber_MeanBx[6]=chamber7_bx_plot->GetMean(1);
+  
+    chamber_MeanBx[7]=chamber8_bx_plot->GetMean(1);
+    chamber_MeanBx[8]=chamber9_bx_plot->GetMean(1);
+    chamber_MeanBx[9]=chamber10_bx_plot->GetMean(1);
+    chamber_MeanBx[10]=chamber11_bx_plot->GetMean(1);
+    chamber_MeanBx[11]=chamber12_bx_plot->GetMean(1);
+    chamber_MeanBx[12]=chamber13_bx_plot->GetMean(1);
+    
+    chamber_MeanBx[13]=chamber14_bx_plot->GetMean(1);
+    chamber_MeanBx[14]=chamber15_bx_plot->GetMean(1);
+    chamber_MeanBx[15]=chamber16_bx_plot->GetMean(1);
+    chamber_MeanBx[16]=chamber17_bx_plot->GetMean(1);
+    chamber_MeanBx[17]=chamber18_bx_plot->GetMean(1);
+    chamber_MeanBx[18]=chamber19_bx_plot->GetMean(1);
+    
+    chamber_MeanBx[19]=chamber20_bx_plot->GetMean(1);
+    chamber_MeanBx[20]=chamber21_bx_plot->GetMean(1);
+    chamber_MeanBx[21]=chamber22_bx_plot->GetMean(1);
+    chamber_MeanBx[22]=chamber23_bx_plot->GetMean(1);
+    chamber_MeanBx[23]=chamber24_bx_plot->GetMean(1);
+    chamber_MeanBx[24]=chamber25_bx_plot->GetMean(1);
+    
+    chamber_MeanBx[25]=chamber26_bx_plot->GetMean(1);
+    chamber_MeanBx[26]=chamber27_bx_plot->GetMean(1);
+    chamber_MeanBx[27]=chamber28_bx_plot->GetMean(1);
+    chamber_MeanBx[28]=chamber29_bx_plot->GetMean(1);
+    chamber_MeanBx[29]=chamber30_bx_plot->GetMean(1);
+    chamber_MeanBx[30]=chamber31_bx_plot->GetMean(1);
+    
+    chamber_MeanBx[31]=chamber32_bx_plot->GetMean(1);
+    chamber_MeanBx[32]=chamber33_bx_plot->GetMean(1);
+    chamber_MeanBx[33]=chamber34_bx_plot->GetMean(1);
+    chamber_MeanBx[34]=chamber35_bx_plot->GetMean(1);
+    chamber_MeanBx[35]=chamber36_bx_plot->GetMean(1);
+    
+    //left overlap
+    chamber_left_MeanBx[0]=chamber1l_bx_plot->GetMean(1);//this is an easy way to get mean BX,1 means x axis,2 means y,3 means z;
+    chamber_left_MeanBx[1]=chamber2l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[2]=chamber3l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[3]=chamber4l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[4]=chamber5l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[5]=chamber6l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[6]=chamber7l_bx_plot->GetMean(1);
+    
+    chamber_left_MeanBx[7]=chamber8l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[8]=chamber9l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[9]=chamber10l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[10]=chamber11l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[11]=chamber12l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[12]=chamber13l_bx_plot->GetMean(1);
+    
+    chamber_left_MeanBx[13]=chamber14l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[14]=chamber15l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[15]=chamber16l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[16]=chamber17l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[17]=chamber18l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[18]=chamber19l_bx_plot->GetMean(1);
+    
+    chamber_left_MeanBx[19]=chamber20l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[20]=chamber21l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[21]=chamber22l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[22]=chamber23l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[23]=chamber24l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[24]=chamber25l_bx_plot->GetMean(1);
+    
+    chamber_left_MeanBx[25]=chamber26l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[26]=chamber27l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[27]=chamber28l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[28]=chamber29l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[29]=chamber30l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[30]=chamber31l_bx_plot->GetMean(1);
+    
+    chamber_left_MeanBx[31]=chamber32l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[32]=chamber33l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[33]=chamber34l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[34]=chamber35l_bx_plot->GetMean(1);
+    chamber_left_MeanBx[35]=chamber36l_bx_plot->GetMean(1);
+    
+    //right overlap
+    chamber_right_MeanBx[0]=chamber1r_bx_plot->GetMean(1);//this is an easy way to get mean BX,1 means x axis,2 means y,3 means z;
+    chamber_right_MeanBx[1]=chamber2r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[2]=chamber3r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[3]=chamber4r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[4]=chamber5r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[5]=chamber6r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[6]=chamber7r_bx_plot->GetMean(1);
+    
+    chamber_right_MeanBx[7]=chamber8r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[8]=chamber9r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[9]=chamber10r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[10]=chamber11r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[11]=chamber12r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[12]=chamber13r_bx_plot->GetMean(1);
+    
+    chamber_right_MeanBx[13]=chamber14r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[14]=chamber15r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[15]=chamber16r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[16]=chamber17r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[17]=chamber18r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[18]=chamber19r_bx_plot->GetMean(1);
+    
+    chamber_right_MeanBx[19]=chamber20r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[20]=chamber21r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[21]=chamber22r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[22]=chamber23r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[23]=chamber24r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[24]=chamber25r_bx_plot->GetMean(1);
+    
+    chamber_right_MeanBx[25]=chamber26r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[26]=chamber27r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[27]=chamber28r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[28]=chamber29r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[29]=chamber30r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[30]=chamber31r_bx_plot->GetMean(1);
+    
+    chamber_right_MeanBx[31]=chamber32r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[32]=chamber33r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[33]=chamber34r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[34]=chamber35r_bx_plot->GetMean(1);
+    chamber_right_MeanBx[35]=chamber36r_bx_plot->GetMean(1);
+    
+    //relative BX
+    for(int i=0;i<35;i++){
+        relative_MeanBx[i]=chamber_right_MeanBx[i]-chamber_left_MeanBx[i+1];
+        chamber_left_MeanBx_for_plot[i]=chamber_left_MeanBx[i+1];
+    }
+    relative_MeanBx[35]=chamber_right_MeanBx[35]-chamber_left_MeanBx[0];
+    chamber_left_MeanBx_for_plot[35]=chamber_left_MeanBx[0];
+    
+    //plot meanBx of chambers
+    Double_t iChamber[36]={0};
+    for(Int_t i=0;i<36;i++){
+        cout<<"Mean Bx in Chamber #"<< i+1 <<" is "<<chamber_MeanBx[i]<< endl;
+        iChamber[i]=i+1;
+    }
+    
+    TGraph *myGraph = new TGraph(36,iChamber,chamber_MeanBx);
+    TGraph *myGraph_right = new TGraph(36,iChamber,chamber_right_MeanBx); myGraph_right->SetMarkerStyle(21); myGraph_right->SetMarkerColor(2);//red
+    TGraph *myGraph_left = new TGraph(36,iChamber,chamber_left_MeanBx_for_plot); myGraph_left->SetMarkerStyle(21); myGraph_left->SetMarkerColor(4);//blue
+    TGraph *myGraph_relative =new TGraph(36,iChamber,relative_MeanBx); myGraph_relative->SetMarkerStyle(21); myGraph_relative->SetMarkerColor(3);//green
+    TMultiGraph *mg=new TMultiGraph();
+    
+   //write all plots in the new root file
+    TFile myFile("/afs/cern.ch/work/w/wshi/public/TimingStudy/TimingStudy_TOF_SPT_overlap.root","RECREATE");
+  
+    TCanvas *C1=new TCanvas("C1","CSCTFlct Bx ME+1/1 with TOF and SPT",700,500);
+    TCanvas *C2=new TCanvas("C2","CSCTFlct Bx ME+1/1 with TOF and SPT in overlap region",700,500);
+
+    
+    C1->cd();
+    C1->SetGrid();
+    myGraph->SetTitle("CSCTF LCT BX in ME+1/1 with TOF and SPT Correction");
+    myGraph->GetXaxis()->SetTitle("Chamber Number");
+    myGraph->GetYaxis()->SetTitle("BX(25ns)");
+    myGraph->SetMarkerStyle(21);
+    myGraph->Draw("AP");
+    myGraph->Write();
+    
+    C2->cd();
+    C2->SetGrid();
+    mg->Add(myGraph_right);
+    mg->Add(myGraph_left);
+    mg->Add(myGraph_relative);
+    /*cout<<"set title"<<endl;
+    mg->SetTitle("CSCTF LCT BX in ME+1/1 with TOF and SPT Correction Overlap");
+    mg->GetXaxis()->SetTitle("Chamber Number");
+    mg->GetYaxis()->SetTitle("BX(25ns)");
+    */
+    mg->Draw("AP");
+    mg->Write();
+
+  chamber1_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+  chamber1_bx_plot->GetYaxis()->SetTitle("#LCTs");
+  chamber1_bx_plot->Write();
+  
+  chamber2_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+  chamber2_bx_plot->GetYaxis()->SetTitle("#LCTs");
+  chamber2_bx_plot->Write();
+    
+  chamber3_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+  chamber3_bx_plot->GetYaxis()->SetTitle("#LCTs");
+  chamber3_bx_plot->Write();
+    
+    chamber4_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber4_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber4_bx_plot->Write();
+    
+    chamber5_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber5_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber5_bx_plot->Write();
+    
+    chamber6_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber6_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber6_bx_plot->Write();
+    
+    chamber7_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber7_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber7_bx_plot->Write();
+    
+    chamber8_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber8_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber8_bx_plot->Write();
+    
+    chamber9_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber9_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber9_bx_plot->Write();
+    
+    chamber10_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber10_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber10_bx_plot->Write();
+    
+    chamber11_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber11_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber11_bx_plot->Write();
+    
+    chamber12_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber12_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber12_bx_plot->Write();
+    
+    chamber13_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber13_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber13_bx_plot->Write();
+    
+    chamber14_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber14_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber14_bx_plot->Write();
+    
+    chamber15_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber15_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber15_bx_plot->Write();
+    
+    chamber16_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber16_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber16_bx_plot->Write();
+    
+    chamber17_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber17_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber17_bx_plot->Write();
+    
+    chamber18_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber18_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber18_bx_plot->Write();
+    
+    chamber19_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber19_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber19_bx_plot->Write();
+    
+    chamber20_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber20_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber20_bx_plot->Write();
+    
+    chamber21_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber21_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber21_bx_plot->Write();
+    
+    chamber22_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber22_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber22_bx_plot->Write();
+    
+    chamber23_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber23_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber23_bx_plot->Write();
+    
+    chamber24_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber24_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber24_bx_plot->Write();
+    
+    chamber25_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber25_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber25_bx_plot->Write();
+    
+    chamber26_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber26_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber26_bx_plot->Write();
+    
+    chamber27_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber27_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber27_bx_plot->Write();
+    
+    chamber28_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber28_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber28_bx_plot->Write();
+    
+    chamber29_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber29_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber29_bx_plot->Write();
+  
+    chamber30_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber30_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber30_bx_plot->Write();
+    
+    chamber31_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber31_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber31_bx_plot->Write();
+    
+    chamber32_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber32_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber32_bx_plot->Write();
+    
+    chamber33_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber33_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber33_bx_plot->Write();
+    
+    chamber34_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber34_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber34_bx_plot->Write();
+    
+    chamber35_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber35_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber35_bx_plot->Write();
+    
+    chamber36_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber36_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber36_bx_plot->Write();
+    
+    //left overlap
+    chamber1l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber1l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber1l_bx_plot->Write();
+    
+    chamber2l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber2l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber2l_bx_plot->Write();
+    
+    chamber3l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber3l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber3l_bx_plot->Write();
+    
+    chamber4l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber4l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber4l_bx_plot->Write();
+    
+    chamber5l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber5l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber5l_bx_plot->Write();
+    
+    chamber6l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber6l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber6l_bx_plot->Write();
+    
+    chamber7l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber7l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber7l_bx_plot->Write();
+    
+    chamber8l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber8l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber8l_bx_plot->Write();
+    
+    chamber9l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber9l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber9l_bx_plot->Write();
+    
+    chamber10l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber10l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber10l_bx_plot->Write();
+    
+    chamber11l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber11l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber11l_bx_plot->Write();
+    
+    chamber12l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber12l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber12l_bx_plot->Write();
+    
+    chamber13l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber13l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber13l_bx_plot->Write();
+    
+    chamber14l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber14l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber14l_bx_plot->Write();
+    
+    chamber15l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber15l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber15l_bx_plot->Write();
+    
+    chamber16l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber16l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber16l_bx_plot->Write();
+    
+    chamber17l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber17l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber17l_bx_plot->Write();
+    
+    chamber18l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber18l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber18l_bx_plot->Write();
+    
+    chamber19l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber19l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber19l_bx_plot->Write();
+    
+    chamber20l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber20l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber20l_bx_plot->Write();
+    
+    chamber21l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber21l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber21l_bx_plot->Write();
+    
+    chamber22l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber22l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber22l_bx_plot->Write();
+    
+    chamber23l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber23l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber23l_bx_plot->Write();
+    
+    chamber24l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber24l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber24l_bx_plot->Write();
+    
+    chamber25l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber25l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber25l_bx_plot->Write();
+    
+    chamber26l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber26l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber26l_bx_plot->Write();
+    
+    chamber27l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber27l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber27l_bx_plot->Write();
+    
+    chamber28l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber28l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber28l_bx_plot->Write();
+    
+    chamber29l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber29l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber29l_bx_plot->Write();
+    
+    chamber30l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber30l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber30l_bx_plot->Write();
+    
+    chamber31l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber31l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber31l_bx_plot->Write();
+    
+    chamber32l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber32l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber32l_bx_plot->Write();
+    
+    chamber33l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber33l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber33l_bx_plot->Write();
+    
+    chamber34l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber34l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber34l_bx_plot->Write();
+    
+    chamber35l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber35l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber35l_bx_plot->Write();
+    
+    chamber36l_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber36l_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber36l_bx_plot->Write();
+    
+    //right overlap
+    chamber1r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber1r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber1r_bx_plot->Write();
+    
+    chamber2r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber2r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber2r_bx_plot->Write();
+    
+    chamber3r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber3r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber3r_bx_plot->Write();
+    
+    chamber4r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber4r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber4r_bx_plot->Write();
+    
+    chamber5r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber5r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber5r_bx_plot->Write();
+    
+    chamber6r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber6r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber6r_bx_plot->Write();
+    
+    chamber7r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber7r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber7r_bx_plot->Write();
+    
+    chamber8r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber8r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber8r_bx_plot->Write();
+    
+    chamber9r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber9r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber9r_bx_plot->Write();
+    
+    chamber10r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber10r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber10r_bx_plot->Write();
+    
+    chamber11r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber11r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber11r_bx_plot->Write();
+    
+    chamber12r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber12r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber12r_bx_plot->Write();
+    
+    chamber13r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber13r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber13r_bx_plot->Write();
+    
+    chamber14r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber14r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber14r_bx_plot->Write();
+    
+    chamber15r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber15r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber15r_bx_plot->Write();
+    
+    chamber16r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber16r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber16r_bx_plot->Write();
+    
+    chamber17r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber17r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber17r_bx_plot->Write();
+    
+    chamber18r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber18r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber18r_bx_plot->Write();
+    
+    chamber19r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber19r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber19r_bx_plot->Write();
+    
+    chamber20r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber20r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber20r_bx_plot->Write();
+    
+    chamber21r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber21r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber21r_bx_plot->Write();
+    
+    chamber22r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber22r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber22r_bx_plot->Write();
+    
+    chamber23r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber23r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber23r_bx_plot->Write();
+    
+    chamber24r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber24r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber24r_bx_plot->Write();
+    
+    chamber25r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber25r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber25r_bx_plot->Write();
+    
+    chamber26r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber26r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber26r_bx_plot->Write();
+    
+    chamber27r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber27r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber27r_bx_plot->Write();
+    
+    chamber28r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber28r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber28r_bx_plot->Write();
+    
+    chamber29r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber29r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber29r_bx_plot->Write();
+    
+    chamber30r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber30r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber30r_bx_plot->Write();
+    
+    chamber31r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber31r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber31r_bx_plot->Write();
+    
+    chamber32r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber32r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber32r_bx_plot->Write();
+    
+    chamber33r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber33r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber33r_bx_plot->Write();
+    
+    chamber34r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber34r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber34r_bx_plot->Write();
+    
+    chamber35r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber35r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber35r_bx_plot->Write();
+    
+    chamber36r_bx_plot->GetXaxis()->SetTitle("BX(25ns)");
+    chamber36r_bx_plot->GetYaxis()->SetTitle("#LCTs");
+    chamber36r_bx_plot->Write();
+    
+    
+  myFile.Close();
+  cout<<"/afs/cern.ch/work/w/wshi/public/TimingStudy/TimingStudy_TOF_SPT_overlap.root finished!"<<endl;
+    cout<<"********************************************"<<endl;
+    cout<<selected_event_i<<" total selected events, they're:"<<endl;
+    for(int i=0;i<selected_event_i;i++){
+        cout<<" #"<<selected_event[i]<<endl;
+    }
+    cout<<"**********************************************"<<endl;
+}
